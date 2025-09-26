@@ -62,7 +62,7 @@ class CarWashStation:
 
         if not (1.0 <= float(rate) <= 5.0):
             raise ValueError("rate must be between 1.0 and 5.0")
-        numerator =  self.average_rating * self.count_of_ratings + float(rate)
+        numerator = self.average_rating * self.count_of_ratings + float(rate)
         new_average = numerator / (self.count_of_ratings + 1)
         self.average_rating = round(new_average, 1)
-
+        self.count_of_ratings += 1
