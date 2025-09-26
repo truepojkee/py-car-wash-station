@@ -49,8 +49,8 @@ class CarWashStation:
         diff = self.clean_power - car.clean_mark
         if diff <= 0:
             return 0.0
-        price = (car.comfort_class * diff * self.average_rating
-                 / self.distance_from_city_center)
+        part = car.comfort_class * diff * self.average_rating
+        price = part / self.distance_from_city_center
         return round(price, 1)
 
     def wash_single_car(self, car: Car) -> None:
@@ -62,8 +62,7 @@ class CarWashStation:
 
         if not (1.0 <= float(rate) <= 5.0):
             raise ValueError("rate must be between 1.0 and 5.0")
-        new_average = ((self.average_rating * self.count_of_ratings
-                       + float(rate))
-                       / (self.count_of_ratings + 1))
+        numerator =  self.average_rating * self.count_of_ratings + float(rate)
+        new_average = numerator / (self.count_of_ratings + 1)
         self.average_rating = round(new_average, 1)
-        self.count_of_ratings += 1
+
